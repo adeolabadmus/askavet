@@ -8,6 +8,4 @@
 *.pydevproject
 *.kpf
 
-#Exclude secrets file
 secrets.py
-./lib/
