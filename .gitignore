@@ -9,3 +9,4 @@
 *.kpf
 
 secrets.py
+migrations

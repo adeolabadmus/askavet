@@ -1,7 +1,14 @@
 from flask import Flask
+from flask.ext.sqlalchemy import SQLAlchemy
+
+from config import Configuration
 
 app = Flask(__name__)
+app.config.from_object(Configuration)
 
-@app.route('/')
-def index():
-    return 'Welcome!'
+db = SQLAlchemy(app)
+import auth.models
+# db.create_all()
+from auth import auth
+app.register_blueprint(auth)
+import controller
