@@ -3,7 +3,7 @@ from flask import request, current_app, render_template
 from . import auth
 from utils.user import get_fb_access_token, get_new_user_info, add_new_user, generate_csrf_token, validate_csrf_token,\
     sign_user_in, UserStatus, get_user_by_social_id, update_user_email, get_logged_in_user
-
+from ..emails.sender import send_welcome_message
 
 @auth.route('/callback/facebook')
 def facebook_callback():
@@ -23,6 +23,9 @@ def facebook_callback():
             if user_status == UserStatus.NEW_USER:
                 add_new_user(user_info)
                 sign_user_in(social_id, access_token)
+                user = get_user_by_social_id(social_id)
+                send_welcome_message(user)
+                return 'Welcome to Ask a Vet!'
             elif user_status == UserStatus.USER_EXISTS:
                 sign_user_in(social_id, access_token)
                 return 'Account exists already. You have been signed in'

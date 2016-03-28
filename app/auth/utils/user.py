@@ -29,7 +29,7 @@ def get_new_user_info(access_token):
     return user_info
 
 def add_new_user(user_info):
-    from .models import User
+    from ..models import User
     try:
         new_user = User(social_id = user_info.get('id'),
                         email = user_info.get('email'),
@@ -43,7 +43,7 @@ def add_new_user(user_info):
         print 'Error creating new user!', e
 
 def get_user_by_social_id(social_id):
-    from .models import User
+    from ..models import User
     return User.query.filter_by(social_id=social_id).first()
 
 class UserStatus:

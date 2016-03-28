@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from ..import db
+from ..questions.models import Question
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -11,7 +12,7 @@ class User(db.Model):
     last_name = db.Column(db.String(64))
     gender = db.Column(db.VARCHAR(1), nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
-    # questions =
+    questions = db.relationship(Question, backref='user', lazy='dynamic')
 
     def __repr__(self):
         return '<User: %r>', self.social_id
@@ -57,5 +58,4 @@ class Doctor(db.Model):
     gender = db.Column(db.VARCHAR(1), nullable=False)
     role = db.Column(db.Integer, default=1)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
-    #responses =
-    #posts =
+    questions = db.relationship(Question, backref='doctor', lazy='dynamic')
