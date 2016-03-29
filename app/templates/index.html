@@ -1,5 +1,62 @@
 {% extends 'base.html' %}
 {% block title %}Ask a Vet{% endblock %}
-{% block body %}
-    <p>Welcome, click <a href="{{url_for('auth.user_login')}}">here</a> to ask your question</p>
+{% block stylesheet %}<link rel="stylesheet" href="/static/css/index.css">{% endblock %}
+{% block content %}
+        <header class="row">
+            <div class="header site-bg center-align col s12 z-depth-1">
+                <h5>Ask-a-Vet NG</h5>
+            </div>
+        </header>
+        <div class="row">
+            <div class="hero col s12">
+                <div class="row">
+                    <h4 class="site-bg col l10 offset-l1 m12 s11 z-depth-1">Your one-stop veterinary centre. Just Ask, we've got the answer.</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row site-details z-depth-1 center-align">
+            <div class="col l12 m12">
+                <i class="fa fa-user-md align-icon fa-4x"></i>
+                <h5>Connect with our team of experts</h5>
+                <h6><a href="https://www.facebook.com/dialog/oauth?client_id={{ config.FB_APP_ID }}
+        &redirect_uri={{url_for('auth.facebook_callback', _external=True)}}&scope=email&state={{ token }}">Login with <i class="fa fa-facebook-official fb-icon"></i> to continue</a></h6>
+            </div>
+        </div>
+        <div class="row site-details center-align">
+            <div class="col l6 s12">
+                <i class="fa fa-newspaper-o center-align fa-4x"></i>
+                <h5>High-Octane Vet Articles</h5>
+                <a class="waves-effect waves-light btn" href="#">READ</a>
+            </div>
+            <div class="col l6 s12">
+                <i class="fa fa-ambulance center-align fa-4x"></i>
+                <h5>Physical Ambulatory Services</h5>
+                <a class="waves-effect waves-light btn" href="#">Register as a Vet</a>
+            </div>
+        </div>
+        <div class="row site-details z-depth-1 center-align">
+            <div class="col l6 s12">
+                <i class="fa fa-paw center-align fa-4x"></i>
+                <h5>Top-Notch Animal Breeders</h5>
+                <a class="waves-effect waves-light btn" href="#">Explore</a>
+            </div>
+            <div class="col l6 s12">
+                <i class="fa fa-shopping-cart center-align fa-4x"></i>
+                <h5>Animal Market Place</h5>
+                <a class="waves-effect waves-light btn" href="#">Visit</a>
+            </div>
+        </div>
+        <footer class="row site-bg valign-wrapper z-depth-1">
+            <i class="fa fa-facebook offset-l1 col l1"></i>
+            <i class="fa fa-twitter col l1"></i>
+            <i class="fa fa-instagram col l1"></i>
+            <span class="col l3">Copyright &copy; 2016 Ask-a-Vet</span>
+        </footer>
+{% endblock %}
+{% block script %}
+{% for msg in get_flashed_messages() %}
+    <script>
+        showToast('{{ msg }}')
+    </script>
+{% endfor %}
 {% endblock %}

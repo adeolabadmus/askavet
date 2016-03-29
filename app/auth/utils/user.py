@@ -1,6 +1,6 @@
 import json, uuid
 
-from flask import current_app, url_for, session
+from flask import redirect, url_for, session, flash
 from google.appengine.api import urlfetch
 from sqlalchemy.exc import SQLAlchemyError
 
