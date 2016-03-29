@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <p>Welcome, click <a href="{{url_for('auth.user_login')}}">here</a> to ask your question
-    </p>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Ask a Vet{% endblock %}
+{% block body %}
+    <p>Welcome, click <a href="{{url_for('auth.user_login')}}">here</a> to ask your question</p>
+{% endblock %}
