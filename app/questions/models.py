@@ -19,6 +19,7 @@ class Question(db.Model):
     title = db.Column(db.String(256), nullable=False)
     body = db.Column(db.Text, nullable=False)
     image_url = db.Column(db.String(2048))
+    anonymous = db.Column(db.Boolean, default=0)
     status = db.Column(db.Integer, default=0)
     rating = db.Column(db.Integer)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
