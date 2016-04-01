@@ -1,0 +1,32 @@
+/*div{*/
+    /*border: 1px dotted black;*/
+/*}*/
+
+.input-field .prefix{
+    font-size: 3rem;
+}
+
+.top-space{
+    height: 2rem;
+}
+
+.pane-new {
+    border-right: 2px solid #6C7A89;
+}
+
+.file-field .btn, .file-field .file-path{
+    height: 2rem;
+    line-height: 2rem;
+}
+
+@media only screen and (min-width: 993px){
+    .container {
+        width: 95%;
+    }
+}
+
+@media(max-width: 992px) {
+    .pane-new {
+        border-right: none;
+    }
+}

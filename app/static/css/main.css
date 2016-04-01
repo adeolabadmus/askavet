@@ -61,6 +61,40 @@ textarea {
     color: #6C7A89;
 }
 
+.row{
+    margin-bottom: 0px;
+}
+
+.page-top{
+    margin-top: 4em;
+}
+
+.page-bottom{
+    height:3px;
+    overflow:hidden;
+}
+
+.header{
+    height: 4em;
+    position: fixed;
+    margin: 0 auto;
+    z-index: 3;
+    color: #FFFFFF;
+}
+
+body{
+    position: relative;
+}
+
+footer{
+    height: 3em;
+    margin: 0 auto;
+    color: #FFFFFF;
+    position: absolute;
+    bottom: 0;
+    width: inherit;
+}
+
 *{
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }

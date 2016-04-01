@@ -14,6 +14,7 @@ db = SQLAlchemy(app)
 from auth import auth
 from questions import questions
 
+from .errors import error_handlers
 app.register_blueprint(auth)
 app.register_blueprint(questions)
 
