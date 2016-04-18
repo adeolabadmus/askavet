@@ -74,6 +74,10 @@ textarea {
     overflow:hidden;
 }
 
+.space-32{
+    height: 2rem;
+}
+
 .header{
     height: 4em;
     position: fixed;
@@ -98,6 +102,11 @@ footer{
 *{
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
+
+*, *::before, *::after{
+    box-sizing: inherit;
+}
+
 /* =
 =========================================================================
    Media Queries

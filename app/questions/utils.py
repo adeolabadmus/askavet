@@ -1,9 +1,9 @@
-import imghdr, os
-import uuid
+import imghdr, os, json, urllib, uuid
 
-from flask import current_app, abort
+from flask import current_app, url_for,session
 from sqlalchemy.exc import SQLAlchemyError
 from gcloud import storage
+from google.appengine.api import urlfetch
 
 from .. import db
 from models import Question
@@ -50,3 +50,18 @@ def add_question(**kwargs):
     except SQLAlchemyError as e:
         print 'ERROR adding new question', e
         raise AddNewQuestionException
+
+def post_to_fb(title):
+    social_id, access_token = session.get('user')
+    load = {'message':'I just asked a question on Ask-A-Vet titled...\n\n\n "%s"\n\n\n Go ask your own too!' % title,
+            'link':  url_for('index', _external=True)
+            }
+    payload = urllib.urlencode(load)
+    url = 'https://graph.facebook.com/me/feed'
+    result = urlfetch.fetch(url=url,
+                    payload=payload,
+                    method=urlfetch.POST,
+                    headers={'Content-Type': 'application/x-www-form-urlencoded',
+                             'Authorization' : 'Bearer %s' % access_token}
+                    )
+    print json.loads(result.content)

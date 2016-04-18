@@ -25,3 +25,6 @@ class Question(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     responses = db.relationship(Response, backref='question', lazy='dynamic')
 
+    def __repr__(self):
+        return '<Question Title: %r>' % self.title
+

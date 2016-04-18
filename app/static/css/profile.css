@@ -19,6 +19,27 @@
     line-height: 2rem;
 }
 
+#fab{
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+}
+
+.pane-old h5{
+    padding: 1rem;
+    color: #FFFFFF;
+    opacity: 0.6;
+    margin-top: 0;
+}
+
+.pane-old div{
+    margin-bottom: 1rem;
+}
+
+.pane-old p{
+    margin-bottom: 0.2rem;
+}
+
 @media only screen and (min-width: 993px){
     .container {
         width: 95%;
@@ -29,4 +50,22 @@
     .pane-new {
         border-right: none;
     }
+}
+
+
+@media(min-width: 992px) {
+    .pane-new {
+        position: fixed;
+    }
+
+    #pane-old{
+        overflow-y: scroll;
+        position: relative;
+        left: 50%;
+        padding-left: 2rem;
+    }
+    #fab{
+        display: none;
+    }
+
 }

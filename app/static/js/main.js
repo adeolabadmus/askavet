@@ -1,3 +1,3 @@
 function showToast(msg){
-    Materialize.toast(msg, 5000)
+    Materialize.toast(msg, 5000);
 }

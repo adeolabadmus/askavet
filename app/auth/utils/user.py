@@ -1,6 +1,7 @@
 import json, uuid
+from functools import wraps
 
-from flask import redirect, url_for, session, flash
+from flask import redirect, url_for, session, flash, render_template
 from google.appengine.api import urlfetch
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -95,6 +96,16 @@ def get_logged_in_user():
     user = session.get('user')
     if user:
         social_id, access_token = user
-        return social_id
+        return get_user_by_social_id(social_id)
     else:
         return None
+
+def login_required(view_func):
+    @wraps(view_func)
+    def wrapper(*args, **kwargs):
+        user = session.get('user')
+        if user is None:
+            flash('Not so fast! Log in to do that.')
+            return render_template('index.html', token=generate_csrf_token())
+        return view_func(*args, **kwargs)
+    return wrapper

@@ -1,0 +1,3 @@
+{% macro question_link(question) %}
+    <a href="{{ url_for('questions.question', question_id=question.id) }}">{{ question.title }}</a>
+{% endmacro %}
