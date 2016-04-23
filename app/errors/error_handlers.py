@@ -12,6 +12,6 @@ from .. import app
 #     return redirect(url_for('index'))
 
 @app.errorhandler(551)
-def user_not_found(e):
+def question_not_added(e):
     flash('A critical error occurred. Our engineers have been notified.')
     return redirect(url_for('questions.user_questions'))

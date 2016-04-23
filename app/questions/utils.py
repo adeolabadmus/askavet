@@ -6,7 +6,7 @@ from gcloud import storage
 from google.appengine.api import urlfetch
 
 from .. import db
-from models import Question
+from models import Question, Response
 from ..errors.exceptions import AddNewQuestionException
 
 client = storage.Client(current_app.config['PROJECT_ID'])
@@ -51,6 +51,9 @@ def add_question(**kwargs):
         print 'ERROR adding new question', e
         raise AddNewQuestionException
 
+def get_question(id):
+    return Question.query.filter_by(id=id).first()
+
 def post_to_fb(title):
     social_id, access_token = session.get('user')
     load = {'message':'I just asked a question on Ask-A-Vet titled...\n\n\n "%s"\n\n\n Go ask your own too!' % title,
@@ -65,3 +68,11 @@ def post_to_fb(title):
                              'Authorization' : 'Bearer %s' % access_token}
                     )
     print json.loads(result.content)
+
+def add_response(**kwargs):
+    response = Response(**kwargs)
+    try:
+        db.session.add(response)
+        db.session.commit()
+    except SQLAlchemyError as e:
+        print 'ERROR adding response', e

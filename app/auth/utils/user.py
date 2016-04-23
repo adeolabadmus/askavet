@@ -47,6 +47,10 @@ def get_user_by_social_id(social_id):
     from ..models import User
     return User.query.filter_by(social_id=social_id).first()
 
+def get_user_by_id(id):
+    from ..models import User
+    return User.query.filter_by(id=id).first()
+
 class UserStatus:
     USER_EXISTS = 0x34F
     USER_EXISTS_DIFF_MAIL = 0x56D

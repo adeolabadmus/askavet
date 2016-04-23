@@ -27,4 +27,3 @@ class Question(db.Model):
 
     def __repr__(self):
         return '<Question Title: %r>' % self.title
-
