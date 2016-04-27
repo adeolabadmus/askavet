@@ -46,7 +46,7 @@ def ask():
 def question(question_id):
     from utils import get_question
     from ..auth.utils.user import get_user_by_id
-    from ..auth.utils.doctor import get_doctor_by_id
+    from ..doctor.utils import get_doctor_by_id
     question = get_question(question_id)
     responses = question.responses.order_by(models.Response.timestamp.asc()).all()
     asker = get_user_by_id(question.user_id)
