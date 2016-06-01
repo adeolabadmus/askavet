@@ -18,15 +18,16 @@ def get_fb_access_token(code, app_id, app_secret):
     access_token =  response.get('access_token')
     return access_token
 
-def get_new_user_info(access_token):
+def get_info_from_fb(access_token):
     result = urlfetch.fetch('https://graph.facebook.com/v2.5/me?fields=email,first_name,last_name,gender',
                             headers={'Authorization' : 'Bearer %s' % access_token})
     user_info = json.loads(result.content)
     user_info['user_token'] = access_token
-    if user_info['gender'] == 'male':
-        user_info['gender'] = 'M'
-    elif user_info['gender'] == 'female':
-        user_info['gender'] = 'F'
+    return format_gender(user_info)
+
+def format_gender(user_info):
+    gender = user_info['gender']
+    user_info['gender'] = 'F' if gender == 'female' else 'M'
     return user_info
 
 def add_new_user(user_info):
@@ -91,10 +92,7 @@ def generate_csrf_token():
 
 def validate_csrf_token(request_token):
     token = session.get('csrf_token')
-    if token == request_token:
-        return True
-    else:
-        return False
+    return True if token == request_token else False
 
 def get_logged_in_user():
     user = session.get('user')

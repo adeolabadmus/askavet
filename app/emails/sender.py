@@ -5,8 +5,8 @@ from sendgrid.exceptions import SendGridError
 
 def send_welcome_message(user):
     html = render_template('emails/welcome.html', first_name=user.first_name)
-    print html
     try:
+        #TODO: Change Sender ID to reflect domain name
         send('Ask a Vet <noreply@askavet.ng>', user.email, 'Welcome to Ask-a-Vet!', html)
     except SendGridError as e:
         print 'MAIL ERROR OCCURRED', e

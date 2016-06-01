@@ -1,7 +1,7 @@
 from flask import request, current_app, redirect, flash, url_for
 
 from . import auth
-from utils.user import get_fb_access_token, get_new_user_info, add_new_user, validate_csrf_token,\
+from utils.user import get_fb_access_token, get_info_from_fb, add_new_user, validate_csrf_token,\
     sign_user_in, UserStatus, get_user_by_social_id, update_user_email
 from ..emails.sender import send_welcome_message
 
@@ -14,7 +14,7 @@ def facebook_callback():
             app_id =  current_app.config.get('FB_APP_ID')
             app_secret =  current_app.config.get('FB_APP_SECRET')
             access_token = get_fb_access_token(code, app_id, app_secret)
-            user_info = get_new_user_info(access_token)
+            user_info = get_info_from_fb(access_token)
             email = user_info.get('email')
             social_id = user_info.get('id')
             if not email:
