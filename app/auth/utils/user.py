@@ -26,6 +26,7 @@ def get_info_from_fb(access_token):
     return format_gender(user_info)
 
 def format_gender(user_info):
+    print 'DEBUG', user_info
     gender = user_info['gender']
     user_info['gender'] = 'F' if gender == 'female' else 'M'
     return user_info

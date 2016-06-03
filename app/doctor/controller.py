@@ -1,5 +1,7 @@
+from flask import render_template
+
 from . import doctor
 
 @doctor.route('/')
 def home():
-    return 'Admin Page'
+    return render_template('doctor/signin.html')

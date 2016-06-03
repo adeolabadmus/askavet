@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Doctors' Sign In{% endblock %}
+{% block stylesheet %}<link rel="stylesheet" href="/static/css/doctor_signin.css">{% endblock %}
+{% block content %}
+        {% include 'includes/_header.html' %}
+        <div class="row page-top center-align">
+            <div class="center">
+
+            </div>
+        </div>
+        <div class="page-bottom"></div>
+        {% include 'includes/_footer.html' %}
+{% endblock %}
+{% block script %}
+{% for msg in get_flashed_messages() %}
+    <script>
+        showToast('{{ msg }}')
+    </script>
+{% endfor %}
+{% endblock %}

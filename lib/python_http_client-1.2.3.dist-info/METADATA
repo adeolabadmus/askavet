@@ -1,0 +1,21 @@
+Metadata-Version: 2.0
+Name: python-http-client
+Version: 1.2.3
+Summary: HTTP REST client, simplified for Python
+Home-page: https://github.com/sendgrid/python-http-client
+Author: Elmer Thomas
+Author-email: dx@sendgrid.com
+License: MIT
+Download-URL: https://github.com/sendgrid/python-http-client/tarball/1.2.3
+Keywords: REST,HTTP,API
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+
+Check out the README at GitHub
+
+

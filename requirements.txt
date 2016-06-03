@@ -1,7 +1,0 @@
-alembic == 0.8.5
-Flask == 0.10.1
-Flask_Migrate == 1.8.0
-Flask_Script == 2.0.5
-sendgrid == 2.2.1
-SQLAlchemy == 1.0.12
-protobuf == 3.0.0b2.post2
