@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %}Question - {{question.title}}{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/static/css/question.css">
+    <link rel="stylesheet" href="/static/css/doctors.css">
+{% endblock %}
+{% block content %}
+    <div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper site-bg">
+        <a href="#!" class="brand-logo">Doctors Only</a>
+        <ul class="right hide-on-med-and-down">
+          <li class="active"><a href="{{ url_for('doctor.home') }}">Questions</a></li>
+          <li><a href="#">Breeders</a></li>
+          <li><a href="#">Ambulatory Hospitals</a></li>
+          <li><a href="#">Doctors</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+    <div class="page-top"></div>
+    <div class="container">
+        <div class="row question">
+            <div class="col offset-l2 l8 s12 m12 z-depth-1">
+                <h6 class="site-color"><b>{{ question.title }}</b></h6>
+                <hr>
+                {% if question.image_url %}
+                <img src="{{ question.image_url }}" alt="Image attached to this question" class="materialboxed responsive-img">
+                {% endif %}
+                <p class="site-color">{{question.body}}</p>
+                <hr>
+                <div class="left">
+                    <span class="site-color small">{{ user.first_name }} {{ user.last_name }}</span>
+                </div>
+                <div class="right">
+                    <span class="site-color small">{{ moment(question.timestamp).format('lll') }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="space-32"></div>
+        {% for response in responses %}
+            {% if response.responder =='user' %}
+                {% set person =  asker %}
+                {% set position =  'left' %}
+                {% set bg =  'site-color' %}
+                {% set doc =  False %}
+            {% else %}
+                {% set person = doctor %}
+                {% set position =  'right' %}
+                {% set bg =  'site-bg' %}
+                {% set doc =  True %}
+            {% endif %}
+            <div class="row response">
+                <div class="col offset-l2 l8 s12 m12 z-depth-1 {{ bg }}">
+                    <div>
+                        <p>{{ response.body }}</p>
+                    </div>
+                    <div class="{{ position }}">
+                        <span>{% if doc %}Dr. {% endif %}{{ person.first_name }}  {{ person.last_name }}<br>
+                            <span class="small">{{ moment(response.timestamp).format('lll') }}</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="space-32"></div>
+        {% endfor %}
+        {% if question.doctor_id %}
+            {% if question.doctor_id == current_user.id %}
+                <div class="row write">
+                    <form action="{{url_for('questions.add_doctor_response', question_id=question.id)}}" method="post">
+                        <div class="col offset-l2 l10 s12 m12 input-field">
+                            <textarea id="body" name="body" type="text" class="materialize-textarea"></textarea>
+                            <label for="body">Respond</label>
+                        </div>
+                        <div class="center">
+                            <button type="submit" class="btn waves-effect waves-light site-bg">Send</button>
+                        </div>
+                    </form>
+                </div>
+            {% endif %}
+        {% else %}
+            <div class="row write">
+                    <form action="{{url_for('questions.add_doctor_response', question_id=question.id)}}" method="post">
+                        <div class="col offset-l2 l10 s12 m12 input-field">
+                            <textarea id="body" name="body" type="text" class="materialize-textarea"></textarea>
+                            <label for="body">Respond & Assign to Me</label>
+                        </div>
+                        <div class="center">
+                            <button type="submit" class="btn waves-effect waves-light site-bg">Send</button>
+                        </div>
+                    </form>
+                </div>
+        {% endif %}
+
+        <div class="page-bottom"></div>
+    </div>
+    {% include 'includes/_footer.html' %}
+{% endblock %}
+{% block script %}
+{% for msg in get_flashed_messages() %}
+    <script>
+        showToast('{{ msg }}')
+    </script>
+{% endfor %}
+{% endblock %}tml' %}

@@ -1,10 +1,11 @@
 from datetime import datetime
+from flask.ext.login import UserMixin
+
 from ..auth.models import Question
+from .. import db, login_manager
 
-from .. import db
 
-
-class Doctor(db.Model):
+class Doctor(db.Model, UserMixin):
     __tablename__ = 'doctors'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     email = db.Column(db.String(64), nullable=False, unique=True)
@@ -16,3 +17,7 @@ class Doctor(db.Model):
     role = db.Column(db.Integer, default=1)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     questions = db.relationship(Question, backref='doctor', lazy='dynamic')
+
+    @login_manager.user_loader
+    def get_doctor(doctor_id):
+        return Doctor.query.get(int(doctor_id))

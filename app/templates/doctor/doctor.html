@@ -1,4 +1,60 @@
 {% extends 'base.html' %}
-{% include 'includes/_header.html' %}
+{% block title %}Doctors' Page{% endblock %}
+{% block stylesheet %}<link rel="stylesheet" href="/static/css/doctors.css">{% endblock %}
+{% block content %}
+    <div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper site-bg">
+        <a href="#!" class="brand-logo">Doctors Only</a>
+        <ul class="right hide-on-med-and-down">
+          <li class="active"><a href="#">Questions</a></li>
+          <li><a href="#">Breeders</a></li>
+          <li><a href="#">Ambulatory Hospitals</a></li>
+          <li><a href="#">Doctors</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+    <div class="container page-top">
+        <div class="row">
+            <div class="col s3"><a class="waves-effect waves-light btn disabled"><span class="right">({{ counts.questions }})</span>All questions</a></div>
+            <div class="col s3"><a class="waves-effect waves-light btn"><span class="right">({{ counts.unanswered }})</span>Unanswered</a></div>
+            <div class="col s3"><a class="waves-effect waves-light btn"><span class="right">({{ counts.assigned }})</span>Assigned to me</a></div>
+            <div class="col s3"><a class="waves-effect waves-light btn"><span class="right">(3)</span>New Responses</a></div>
+        </div>
 
-{% include 'includes/_footer.html' %}
+        <table class="striped responsive-table">
+            <thead class="row">
+                <tr>
+                    <th class="col s4">User</th>
+                    <th class="col s4">Title</th>
+                    <th class="col s4">Doctor</th>
+                </tr>
+            </thead>
+
+            <tbody class="row">
+            {% for question in questions %}
+                <tr>
+                    <td class="col s4">{{ question.user.first_name }} {{ question.user.last_name }}</td>
+                    <td class="col s4"><a href="{{ url_for('doctor.question', question_id=question.id) }}">{{ question.title }}</a></td>
+                    <td class="col s4">
+                        {% if question.doctor_id %}
+                        <span class="green-text">Dr. {{ question.doctor.first_name }} {{ question.doctor.last_name }}</span>
+                        {% else %}
+                        <i class="fa fa-user-times red-text"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block script %}
+{% for msg in get_flashed_messages() %}
+    <script>
+        showToast('{{ msg }}')
+    </script>
+{% endfor %}
+{% endblock %}

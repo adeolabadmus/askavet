@@ -1,0 +1,7 @@
+ul, ol{
+    line-height: 64px;
+}
+
+td, th{
+    padding: 15px 15px !important;
+}

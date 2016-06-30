@@ -69,6 +69,15 @@ def post_to_fb(title):
                     )
     print json.loads(result.content)
 
+def assign_to_doctor(question_id, doctor_id):
+    question = get_question(question_id)
+    try:
+        question.doctor_id = doctor_id
+        db.session.add(question)
+        db.session.commit()
+    except SQLAlchemyError as e:
+        print 'ERROR assigning doctor to question', e
+
 def add_response(**kwargs):
     response = Response(**kwargs)
     try:
@@ -76,3 +85,6 @@ def add_response(**kwargs):
         db.session.commit()
     except SQLAlchemyError as e:
         print 'ERROR adding response', e
+
+def get_responses(question):
+    return question.responses.order_by(Response.timestamp.asc()).all()

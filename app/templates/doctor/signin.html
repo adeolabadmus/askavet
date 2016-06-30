@@ -6,6 +6,34 @@
         <div class="row page-top center-align">
             <div class="center">
 
+    <div class="row">
+        <form method="post" action="{{ url_for('doctor.sign_in') }}" class="col s12">
+            <div class="row ">
+                <div class="input-field col l4 s6 offset-l4 offset-s3">
+                    {{ form.hidden_tag() }}
+                    {{ form.email }}
+                    {{ form.email.label }}
+                </div>
+            </div>
+            <div class="row ">
+                <div class="input-field col l4 s6 offset-l4 offset-s3">
+                    {{ form.password }}
+                    {{ form.password.label }}
+                </div>
+            </div>
+            <div class="row ">
+                <div class="input-field col l4 s6 offset-l4 offset-s3">
+                    {{ form.remember_me }}
+                    {{ form.remember_me.label }}
+                </div>
+            </div>
+            <div class="row ">
+                <div class="input-field col l2 s4 offset-l5 offset-s4">
+                    {{ form.sign_in(class='btn waves-light waves-effect site-btn') }}
+                </div>
+            </div>
+        </form>
+    </div>
             </div>
         </div>
         <div class="page-bottom"></div>
