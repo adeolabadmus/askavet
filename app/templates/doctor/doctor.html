@@ -18,7 +18,7 @@
     <div class="container page-top">
         {% block buttons %}
         <div class="row">
-            <div class="col s3"><a class="waves-effect waves-light btn" href="{{ url_for('doctor.home') }}"><span class="right">({{ counts.questions }})</span>All questions</a></div>
+            <div class="col s3"><a class="waves-effect waves-light btn" href="{{ url_for('doctor.questions') }}"><span class="right">({{ counts.questions }})</span>All questions</a></div>
             <div class="col s3"><a class="waves-effect waves-light btn" href="{{ url_for('doctor.unanswered') }}"><span class="right">({{ counts.unanswered }})</span>Unanswered</a></div>
             <div class="col s3"><a class="waves-effect waves-light btn" href="{{ url_for('doctor.assigned') }}"><span class="right">({{ counts.assigned }})</span>Assigned to me</a></div>
             <div class="col s3"><a class="waves-effect waves-light btn"><span class="right"></span>New Responses</a></div>

@@ -7,7 +7,7 @@ from forms import SignInForm
 @doctor.route('/signin', methods=['GET', 'POST'])
 def sign_in():
     if current_user.is_authenticated:
-        return redirect(url_for('doctor.home'))
+        return redirect(url_for('doctor.questions'))
     from utils import verify_email, verify_password
     form = SignInForm()
     if form.validate_on_submit():
@@ -15,7 +15,7 @@ def sign_in():
         if doctor is not None and verify_password(doctor, form.password.data):
             login_user(doctor, form.remember_me.data)
             flash('Welcome, Dr. %s' % doctor.first_name)
-            return redirect(request.args.get('next') or url_for('doctor.home'))
+            return redirect(request.args.get('next') or url_for('doctor.questions'))
         else:
             flash('Invalid username or password!')
             redirect(url_for(request.endpoint))
@@ -24,7 +24,7 @@ def sign_in():
 
 @doctor.route('/questions/')
 @doctor_login
-def home():
+def questions():
     from utils import get_question_counts, get_all_questions
     return render_template('doctor/doctor.html', counts=get_question_counts(), questions=get_all_questions())
 
@@ -35,12 +35,12 @@ def unanswered():
     from utils import get_question_counts, get_unanswered
     return render_template('doctor/doctor.html', counts=get_question_counts(), questions=get_unanswered())
 
+
 @doctor.route('/questions/assigned/')
 @doctor_login
 def assigned():
     from utils import get_question_counts, get_assigned
     return render_template('doctor/doctor.html', counts=get_question_counts(), questions=get_assigned())
-
 
 
 @doctor.route('/question/<int:question_id>')
