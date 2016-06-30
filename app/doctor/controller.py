@@ -22,11 +22,26 @@ def sign_in():
     form.email.data = request.form.get('email')
     return render_template('doctor/signin.html', form=form)
 
-@doctor.route('/')
+@doctor.route('/questions/')
 @doctor_login
 def home():
     from utils import get_question_counts, get_all_questions
     return render_template('doctor/doctor.html', counts=get_question_counts(), questions=get_all_questions())
+
+
+@doctor.route('/questions/unanswered/')
+@doctor_login
+def unanswered():
+    from utils import get_question_counts, get_unanswered
+    return render_template('doctor/doctor.html', counts=get_question_counts(), questions=get_unanswered())
+
+@doctor.route('/questions/assigned/')
+@doctor_login
+def assigned():
+    from utils import get_question_counts, get_assigned
+    return render_template('doctor/doctor.html', counts=get_question_counts(), questions=get_assigned())
+
+
 
 @doctor.route('/question/<int:question_id>')
 @doctor_login
